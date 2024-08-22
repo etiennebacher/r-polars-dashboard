@@ -1,4 +1,4 @@
-Package: dashboard
+Package: r-polars-dashboard
 Title: Dashboard comparing r-polars and py-polars APIs
 Version: 1.0.0
 Authors@R:
@@ -20,3 +20,5 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3.9000
+URL: https://github.com/etiennebacher/r-polars-dashboard
+BugReports: https://github.com/etiennebacher/r-polars-dashboard/issues
