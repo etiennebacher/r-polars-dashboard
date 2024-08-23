@@ -63,7 +63,8 @@ r_pol_funs <- data.table::rbindlist(dicts) |>
   )
 
 py_pol_funs <- data.table::fread("py_polars_functions_and_args.csv") |>
-  as_tibble()
+  as_tibble() |> 
+  filter(! (grepl("_select", fun) & args == "exprs"))
 
 dat <- py_pol_funs |>
   left_join(r_pol_funs, suffix = c("_py", "_r"), keep = TRUE)
