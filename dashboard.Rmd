@@ -64,11 +64,16 @@ r_pol_funs <- data.table::rbindlist(dicts) |>
 
 py_pol_funs <- data.table::fread("py_polars_functions_and_args.csv") |>
   as_tibble() |> 
-  filter(! (grepl("_select", fun) & args == "exprs"))
+  filter(! (grepl("_select", fun) & args == "exprs")) 
 
 dat <- py_pol_funs |>
   left_join(r_pol_funs, suffix = c("_py", "_r"), keep = TRUE)
 
+in_r_not_py <- setdiff(unique(r_pol_funs$fun), unique(py_pol_funs$fun))
+in_py_not_r <- setdiff(unique(py_pol_funs$fun), unique(r_pol_funs$fun))
+
+cat("Number of functions in r-polars and not py-polars:", length(in_r_not_py), "\n")
+cat("Number of functions in py-polars and not r-polars:", length(in_py_not_r))
 
 reactable(
   dat,
