@@ -1,16 +1,21 @@
 import polars as pl
 import inspect
 import polars.selectors as cs
+import re
+
 
 families = ["LazyFrame", "DataFrame"]
 
 dicts = {}
 
-
-# family = "struct"
-# function = "field"
-# fam = getattr(pl.col("x"), family)
+# family = "LazyFrame"
+# function = "melt"
+# fam = getattr(pl, family)
 # args = getattr(fam, function)
+
+# source = inspect.getsource(args)
+# re.match("\s+@deprecate_function", source)
+
 # # vkw = inspect.getfullargspec(args).varkw
 # # if vkw is not None and isinstance(vkw, str):
 # #     vkw = "..."
@@ -24,7 +29,6 @@ dicts = {}
 # out = [x for x in out if not x.startswith("_") and not x.startswith("more_") and x != "self"]
 
 
-
 def get_args(family, function):
     if family in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]:
         fam = getattr(pl.col("x"), family)
@@ -35,7 +39,10 @@ def get_args(family, function):
     else:
         args = getattr(pl.col("x"), function)
 
-    
+    source = inspect.getsource(args)
+    if re.match("\s+@deprecate_function", source):
+        return
+
     args2 = (
         inspect.getfullargspec(args).args
         + [inspect.getfullargspec(args).varargs]
@@ -44,8 +51,18 @@ def get_args(family, function):
     )
     out = [x for x in args2 if x is not None]
     out = [x for x in out if not x.startswith("_") and x != "self"]
-    out = ["..." if x.startswith("more_") or x in ["constraints", "kwargs"] or x.startswith("named_") else x for x in out]
+    out = [
+        (
+            "..."
+            if x.startswith("more_")
+            or x in ["constraints", "kwargs"]
+            or x.startswith("named_")
+            else x
+        )
+        for x in out
+    ]
     return [out]
+
 
 # LazyFrame, DataFrame
 for family in families:
@@ -59,7 +76,12 @@ for family in families:
 
 # Expr
 fns = dir(pl.col("x"))
-fns = [x for x in fns if not x.startswith("_") and not x in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]]
+fns = [
+    x
+    for x in fns
+    if not x.startswith("_")
+    and x not in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]
+]
 for function in fns:
     try:
         dicts["Expr_" + function] = get_args(family=None, function=function)
@@ -72,10 +94,11 @@ for subns in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]:
     fns = [x for x in fns if not x.startswith("_")]
     for function in fns:
         try:
-            dicts["Expr_" + subns + "_" + function] = get_args(family=subns, function=function)
+            dicts["Expr_" + subns + "_" + function] = get_args(
+                family=subns, function=function
+            )
         except:
             print(f"function {function} has no args")
-
 
 
 pl.from_dict(dicts).unpivot(cs.all()).explode("value").filter(
