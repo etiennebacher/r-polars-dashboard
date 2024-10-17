@@ -20,32 +20,36 @@ Overview
 
 
 ```{r pr_summary}
-dicts = list()
+# polars -----------------------------------------------
 
-families = c("LazyFrame", "DataFrame", "Expr", "ExprArr", "ExprCat", "ExprDT",
-             "ExprList", "ExprMeta", "ExprName", "ExprStr", "ExprStruct")
+dicts <- list()
 
-get_args = function(fun) {
-  args = tryCatch(
+families <- c(
+  "LazyFrame", "DataFrame", "Expr", "ExprArr", "ExprCat", "ExprDT",
+  "ExprList", "ExprMeta", "ExprName", "ExprStr", "ExprStruct"
+)
+
+get_args <- function(fun) {
+  args <- tryCatch(
     formalArgs(eval(parse(text = paste0("polars:::", fun)))),
     error = function(e) NULL
   )
   args[args != "self"]
 }
 
-all_polars_obj = ls(getNamespace("polars"), all.names = TRUE)
+all_polars_obj <- ls(getNamespace("polars"), all.names = TRUE)
 
 for (fam in families) {
-  fns = all_polars_obj[startsWith(all_polars_obj, paste0(fam, "_"))]
+  fns <- all_polars_obj[startsWith(all_polars_obj, paste0(fam, "_"))]
   for (fun in fns) {
-    args = get_args(fun = fun)
+    args <- get_args(fun = fun)
     if (length(args) == 0) next
-    dicts[[paste0(fun)]] = data.frame(fun = fun, args = args)
+    dicts[[paste0(fun)]] <- data.frame(fun = fun, args = args)
   }
 }
 
 r_pol_funs <- data.table::rbindlist(dicts) |>
-  as_tibble() |> 
+  as_tibble() |>
   mutate(
     fun = stringr::str_replace_all(
       fun,
@@ -62,12 +66,53 @@ r_pol_funs <- data.table::rbindlist(dicts) |>
     )
   )
 
+# neopolars -----------------------------------------------------------
+
+dicts <- list()
+
+families <- c(
+  "LazyFrame", "DataFrame", "expr", "expr_arr", "expr_cat", "expr_dt",
+  "expr_list", "expr_meta", "expr_name", "expr_str", "expr_struct"
+)
+
+get_args <- function(fun) {
+  args <- tryCatch(
+    formalArgs(eval(parse(text = paste0("neopolars:::", fun)))),
+    error = function(e) NULL
+  )
+  args[args != "self"]
+}
+
+all_polars_obj <- ls(getNamespace("neopolars"), all.names = TRUE)
+
+for (fam in families) {
+  fns <- all_polars_obj[startsWith(all_polars_obj, paste0(fam, "_"))]
+  for (fun in fns) {
+    args <- get_args(fun = fun)
+    if (length(args) == 0) next
+    dicts[[paste0(fun)]] <- data.frame(fun = fun, args = args)
+  }
+}
+
+r_neopol_funs <- data.table::rbindlist(dicts) |>
+  as_tibble() |>
+  mutate(
+    fun = stringr::str_replace_all(fun, c("expr__" = "expr_")),
+    fun = stringr::str_replace_all(fun, c("expr_" = "Expr_"))
+  )
+
+# py-polars -----------------------------------------------------
+
 py_pol_funs <- data.table::fread("py_polars_functions_and_args.csv") |>
-  as_tibble() |> 
-  filter(! (grepl("_select", fun) & args == "exprs")) 
+  as_tibble() |>
+  filter(!(grepl("_select", fun) & args == "exprs"))
+
+# gather ---------------------------------------------------
 
 dat <- py_pol_funs |>
-  left_join(r_pol_funs, suffix = c("_py", "_r"), keep = TRUE)
+  left_join(r_pol_funs, suffix = c("_py", "_r"), keep = TRUE) |>
+  left_join(r_neopol_funs, join_by(fun_py == fun, args_py == args), keep = TRUE) |>
+  rename(fun_neo = fun, args_neo = args)
 
 in_r_not_py <- setdiff(unique(r_pol_funs$fun), unique(py_pol_funs$fun))
 in_py_not_r <- setdiff(unique(py_pol_funs$fun), unique(r_pol_funs$fun))
@@ -87,13 +132,25 @@ reactable(
   columns = list(
     fun_r = colDef(
       style = function(value) {
-        color = ifelse(is.na(value), "#ffb3b3", "white")
+        color <- ifelse(is.na(value), "#ffb3b3", "white")
         list(background = color)
       }
     ),
     args_r = colDef(
       style = function(value) {
-        color = ifelse(is.na(value), "#ffb3b3", "white")
+        color <- ifelse(is.na(value), "#ffb3b3", "white")
+        list(background = color)
+      }
+    ),
+    fun_neo = colDef(
+      style = function(value) {
+        color <- ifelse(is.na(value), "#ffb3b3", "white")
+        list(background = color)
+      }
+    ),
+    args_neo = colDef(
+      style = function(value) {
+        color <- ifelse(is.na(value), "#ffb3b3", "white")
         list(background = color)
       }
     )

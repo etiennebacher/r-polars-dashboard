@@ -13,6 +13,7 @@ Imports:
     data.table,
     dplyr,
     flexdashboard,
+    neopolars,
     polars,
     reactable,
     rmarkdown,
