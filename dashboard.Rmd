@@ -25,8 +25,17 @@ Overview
 dicts <- list()
 
 families <- c(
-  "LazyFrame", "DataFrame", "Expr", "ExprArr", "ExprCat", "ExprDT",
-  "ExprList", "ExprMeta", "ExprName", "ExprStr", "ExprStruct"
+  "LazyFrame",
+  "DataFrame",
+  "Expr",
+  "ExprArr",
+  "ExprCat",
+  "ExprDT",
+  "ExprList",
+  "ExprMeta",
+  "ExprName",
+  "ExprStr",
+  "ExprStruct"
 )
 
 get_args <- function(fun) {
@@ -71,8 +80,17 @@ r_pol_funs <- data.table::rbindlist(dicts) |>
 dicts <- list()
 
 families <- c(
-  "LazyFrame", "DataFrame", "expr", "expr_arr", "expr_cat", "expr_dt",
-  "expr_list", "expr_meta", "expr_name", "expr_str", "expr_struct"
+  "lazyframe",
+  "dataframe",
+  "expr",
+  "expr_arr",
+  "expr_cat",
+  "expr_dt",
+  "expr_list",
+  "expr_meta",
+  "expr_name",
+  "expr_str",
+  "expr_struct"
 )
 
 get_args <- function(fun) {
@@ -98,7 +116,9 @@ r_neopol_funs <- data.table::rbindlist(dicts) |>
   as_tibble() |>
   mutate(
     fun = stringr::str_replace_all(fun, c("expr__" = "expr_")),
-    fun = stringr::str_replace_all(fun, c("expr_" = "Expr_"))
+    fun = stringr::str_replace_all(fun, c("expr_" = "Expr_")),
+    fun = stringr::str_replace_all(fun, c("lazyframe__" = "LazyFrame_")),
+    fun = stringr::str_replace_all(fun, c("dataframe__" = "DataFrame_"))
   )
 
 # py-polars -----------------------------------------------------
@@ -111,13 +131,21 @@ py_pol_funs <- data.table::fread("py_polars_functions_and_args.csv") |>
 
 dat <- py_pol_funs |>
   left_join(r_pol_funs, suffix = c("_py", "_r"), keep = TRUE) |>
-  left_join(r_neopol_funs, join_by(fun_py == fun, args_py == args), keep = TRUE) |>
+  left_join(
+    r_neopol_funs,
+    join_by(fun_py == fun, args_py == args),
+    keep = TRUE
+  ) |>
   rename(fun_neo = fun, args_neo = args)
 
 in_r_not_py <- setdiff(unique(r_pol_funs$fun), unique(py_pol_funs$fun))
 in_py_not_r <- setdiff(unique(py_pol_funs$fun), unique(r_pol_funs$fun))
 
-cat("Number of functions in r-polars and not py-polars:", length(in_r_not_py), "\n")
+cat(
+  "Number of functions in r-polars and not py-polars:",
+  length(in_r_not_py),
+  "\n"
+)
 cat("Number of functions in py-polars and not r-polars:", length(in_py_not_r))
 
 reactable(
@@ -158,7 +186,9 @@ reactable(
   theme = reactableTheme(
     headerStyle = list(
       "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
-      "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      "&[aria-sort='ascending'], &[aria-sort='descending']" = list(
+        background = "hsl(0, 0%, 96%)"
+      ),
       borderColor = "#555"
     ),
     style = list(
