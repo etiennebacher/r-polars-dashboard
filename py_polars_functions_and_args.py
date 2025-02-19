@@ -55,12 +55,14 @@ def get_args(family, function):
         (
             "..."
             if x.startswith("more_")
-            or x in ["constraints", "kwargs"]
+            or x in ["constraints", "kwargs", "columns"]
             or x.startswith("named_")
             else x
         )
         for x in out
     ]
+    if len(out) == 0:
+        return [["NO ARGS"]]
     return [out]
 
 

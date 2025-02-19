@@ -2,9 +2,11 @@ fun,args
 LazyFrame_bottom_k,k
 LazyFrame_bottom_k,by
 LazyFrame_bottom_k,reverse
+LazyFrame_cache,NO ARGS
 LazyFrame_cast,dtypes
 LazyFrame_cast,strict
 LazyFrame_clear,n
+LazyFrame_clone,NO ARGS
 LazyFrame_collect,type_coercion
 LazyFrame_collect,predicate_pushdown
 LazyFrame_collect,projection_pushdown
@@ -30,13 +32,16 @@ LazyFrame_collect_async,comm_subexpr_elim
 LazyFrame_collect_async,cluster_with_columns
 LazyFrame_collect_async,collapse_joins
 LazyFrame_collect_async,streaming
+LazyFrame_collect_schema,NO ARGS
+LazyFrame_count,NO ARGS
 LazyFrame_describe,percentiles
 LazyFrame_describe,interpolation
 LazyFrame_deserialize,cls
 LazyFrame_deserialize,source
 LazyFrame_deserialize,format
-LazyFrame_drop,columns
+LazyFrame_drop,...
 LazyFrame_drop,strict
+LazyFrame_drop_nans,subset
 LazyFrame_drop_nulls,subset
 LazyFrame_explain,format
 LazyFrame_explain,optimized
@@ -51,7 +56,7 @@ LazyFrame_explain,cluster_with_columns
 LazyFrame_explain,collapse_joins
 LazyFrame_explain,streaming
 LazyFrame_explain,tree_format
-LazyFrame_explode,columns
+LazyFrame_explode,...
 LazyFrame_explode,...
 LazyFrame_fill_nan,value
 LazyFrame_fill_null,value
@@ -60,6 +65,7 @@ LazyFrame_fill_null,limit
 LazyFrame_fill_null,matches_supertype
 LazyFrame_filter,predicates
 LazyFrame_filter,...
+LazyFrame_first,NO ARGS
 LazyFrame_gather_every,n
 LazyFrame_gather_every,offset
 LazyFrame_group_by,by
@@ -76,6 +82,7 @@ LazyFrame_group_by_dynamic,group_by
 LazyFrame_group_by_dynamic,start_by
 LazyFrame_head,n
 LazyFrame_inspect,fmt
+LazyFrame_interpolate,NO ARGS
 LazyFrame_join,other
 LazyFrame_join,on
 LazyFrame_join,how
@@ -85,6 +92,7 @@ LazyFrame_join,suffix
 LazyFrame_join,validate
 LazyFrame_join,join_nulls
 LazyFrame_join,coalesce
+LazyFrame_join,maintain_order
 LazyFrame_join,allow_parallel
 LazyFrame_join,force_parallel
 LazyFrame_join_asof,other
@@ -100,9 +108,13 @@ LazyFrame_join_asof,tolerance
 LazyFrame_join_asof,allow_parallel
 LazyFrame_join_asof,force_parallel
 LazyFrame_join_asof,coalesce
+LazyFrame_join_asof,allow_exact_matches
+LazyFrame_join_asof,check_sortedness
 LazyFrame_join_where,other
 LazyFrame_join_where,predicates
 LazyFrame_join_where,suffix
+LazyFrame_last,NO ARGS
+LazyFrame_lazy,NO ARGS
 LazyFrame_limit,n
 LazyFrame_map_batches,function
 LazyFrame_map_batches,predicate_pushdown
@@ -112,8 +124,13 @@ LazyFrame_map_batches,no_optimizations
 LazyFrame_map_batches,schema
 LazyFrame_map_batches,validate_output_schema
 LazyFrame_map_batches,streamable
+LazyFrame_max,NO ARGS
+LazyFrame_mean,NO ARGS
+LazyFrame_median,NO ARGS
 LazyFrame_merge_sorted,other
 LazyFrame_merge_sorted,key
+LazyFrame_min,NO ARGS
+LazyFrame_null_count,NO ARGS
 LazyFrame_pipe,function
 LazyFrame_pipe,...
 LazyFrame_profile,type_coercion
@@ -134,6 +151,7 @@ LazyFrame_quantile,quantile
 LazyFrame_quantile,interpolation
 LazyFrame_rename,mapping
 LazyFrame_rename,strict
+LazyFrame_reverse,NO ARGS
 LazyFrame_rolling,index_column
 LazyFrame_rolling,period
 LazyFrame_rolling,offset
@@ -186,6 +204,9 @@ LazyFrame_sink_csv,simplify_expression
 LazyFrame_sink_csv,slice_pushdown
 LazyFrame_sink_csv,collapse_joins
 LazyFrame_sink_csv,no_optimization
+LazyFrame_sink_csv,storage_options
+LazyFrame_sink_csv,credential_provider
+LazyFrame_sink_csv,retries
 LazyFrame_sink_ipc,path
 LazyFrame_sink_ipc,compression
 LazyFrame_sink_ipc,maintain_order
@@ -196,6 +217,9 @@ LazyFrame_sink_ipc,simplify_expression
 LazyFrame_sink_ipc,slice_pushdown
 LazyFrame_sink_ipc,collapse_joins
 LazyFrame_sink_ipc,no_optimization
+LazyFrame_sink_ipc,storage_options
+LazyFrame_sink_ipc,credential_provider
+LazyFrame_sink_ipc,retries
 LazyFrame_sink_ndjson,path
 LazyFrame_sink_ndjson,maintain_order
 LazyFrame_sink_ndjson,type_coercion
@@ -205,6 +229,9 @@ LazyFrame_sink_ndjson,simplify_expression
 LazyFrame_sink_ndjson,slice_pushdown
 LazyFrame_sink_ndjson,collapse_joins
 LazyFrame_sink_ndjson,no_optimization
+LazyFrame_sink_ndjson,storage_options
+LazyFrame_sink_ndjson,credential_provider
+LazyFrame_sink_ndjson,retries
 LazyFrame_sink_parquet,path
 LazyFrame_sink_parquet,compression
 LazyFrame_sink_parquet,compression_level
@@ -219,6 +246,9 @@ LazyFrame_sink_parquet,simplify_expression
 LazyFrame_sink_parquet,slice_pushdown
 LazyFrame_sink_parquet,collapse_joins
 LazyFrame_sink_parquet,no_optimization
+LazyFrame_sink_parquet,storage_options
+LazyFrame_sink_parquet,credential_provider
+LazyFrame_sink_parquet,retries
 LazyFrame_slice,offset
 LazyFrame_slice,length
 LazyFrame_sort,by
@@ -230,6 +260,7 @@ LazyFrame_sort,multithreaded
 LazyFrame_sql,query
 LazyFrame_sql,table_name
 LazyFrame_std,ddof
+LazyFrame_sum,NO ARGS
 LazyFrame_tail,n
 LazyFrame_top_k,k
 LazyFrame_top_k,by
@@ -237,7 +268,7 @@ LazyFrame_top_k,reverse
 LazyFrame_unique,subset
 LazyFrame_unique,keep
 LazyFrame_unique,maintain_order
-LazyFrame_unnest,columns
+LazyFrame_unnest,...
 LazyFrame_unnest,...
 LazyFrame_unpivot,on
 LazyFrame_unpivot,index
@@ -263,20 +294,24 @@ DataFrame_bottom_k,reverse
 DataFrame_cast,dtypes
 DataFrame_cast,strict
 DataFrame_clear,n
+DataFrame_clone,NO ARGS
+DataFrame_collect_schema,NO ARGS
 DataFrame_corr,...
+DataFrame_count,NO ARGS
 DataFrame_describe,percentiles
 DataFrame_describe,interpolation
 DataFrame_deserialize,cls
 DataFrame_deserialize,source
 DataFrame_deserialize,format
-DataFrame_drop,columns
+DataFrame_drop,...
 DataFrame_drop,strict
 DataFrame_drop_in_place,name
+DataFrame_drop_nans,subset
 DataFrame_drop_nulls,subset
 DataFrame_equals,other
 DataFrame_equals,null_equal
 DataFrame_estimated_size,unit
-DataFrame_explode,columns
+DataFrame_explode,...
 DataFrame_explode,...
 DataFrame_extend,other
 DataFrame_fill_nan,value
@@ -292,6 +327,7 @@ DataFrame_gather_every,offset
 DataFrame_get_column,name
 DataFrame_get_column,default
 DataFrame_get_column_index,name
+DataFrame_get_columns,NO ARGS
 DataFrame_glimpse,max_items_per_column
 DataFrame_glimpse,max_colname_length
 DataFrame_glimpse,return_as_string
@@ -312,12 +348,17 @@ DataFrame_hash_rows,seed_1
 DataFrame_hash_rows,seed_2
 DataFrame_hash_rows,seed_3
 DataFrame_head,n
-DataFrame_hstack,columns
+DataFrame_hstack,...
 DataFrame_hstack,in_place
 DataFrame_insert_column,index
 DataFrame_insert_column,column
+DataFrame_interpolate,NO ARGS
+DataFrame_is_duplicated,NO ARGS
+DataFrame_is_empty,NO ARGS
+DataFrame_is_unique,NO ARGS
 DataFrame_item,row
 DataFrame_item,column
+DataFrame_iter_columns,NO ARGS
 DataFrame_iter_rows,named
 DataFrame_iter_rows,buffer_size
 DataFrame_iter_slices,n_rows
@@ -330,6 +371,7 @@ DataFrame_join,suffix
 DataFrame_join,validate
 DataFrame_join,join_nulls
 DataFrame_join,coalesce
+DataFrame_join,maintain_order
 DataFrame_join_asof,other
 DataFrame_join_asof,left_on
 DataFrame_join_asof,right_on
@@ -343,18 +385,28 @@ DataFrame_join_asof,tolerance
 DataFrame_join_asof,allow_parallel
 DataFrame_join_asof,force_parallel
 DataFrame_join_asof,coalesce
+DataFrame_join_asof,allow_exact_matches
+DataFrame_join_asof,check_sortedness
 DataFrame_join_where,other
 DataFrame_join_where,predicates
 DataFrame_join_where,suffix
+DataFrame_lazy,NO ARGS
 DataFrame_limit,n
 DataFrame_map_rows,function
 DataFrame_map_rows,return_dtype
 DataFrame_map_rows,inference_size
+DataFrame_max,NO ARGS
+DataFrame_max_horizontal,NO ARGS
+DataFrame_mean,NO ARGS
 DataFrame_mean_horizontal,ignore_nulls
+DataFrame_median,NO ARGS
 DataFrame_merge_sorted,other
 DataFrame_merge_sorted,key
+DataFrame_min,NO ARGS
+DataFrame_min_horizontal,NO ARGS
 DataFrame_n_chunks,strategy
 DataFrame_n_unique,subset
+DataFrame_null_count,NO ARGS
 DataFrame_partition_by,by
 DataFrame_partition_by,...
 DataFrame_partition_by,maintain_order
@@ -369,12 +421,15 @@ DataFrame_pivot,aggregate_function
 DataFrame_pivot,maintain_order
 DataFrame_pivot,sort_columns
 DataFrame_pivot,separator
+DataFrame_product,NO ARGS
 DataFrame_quantile,quantile
 DataFrame_quantile,interpolation
+DataFrame_rechunk,NO ARGS
 DataFrame_rename,mapping
 DataFrame_rename,strict
 DataFrame_replace_column,index
 DataFrame_replace_column,column
+DataFrame_reverse,NO ARGS
 DataFrame_rolling,index_column
 DataFrame_rolling,period
 DataFrame_rolling,offset
@@ -415,11 +470,13 @@ DataFrame_sort,maintain_order
 DataFrame_sql,query
 DataFrame_sql,table_name
 DataFrame_std,ddof
+DataFrame_sum,NO ARGS
 DataFrame_sum_horizontal,ignore_nulls
 DataFrame_tail,n
 DataFrame_to_arrow,compat_level
 DataFrame_to_dict,as_series
-DataFrame_to_dummies,columns
+DataFrame_to_dicts,NO ARGS
+DataFrame_to_dummies,...
 DataFrame_to_dummies,separator
 DataFrame_to_dummies,drop_first
 DataFrame_to_init_repr,n
@@ -451,7 +508,7 @@ DataFrame_transpose,column_names
 DataFrame_unique,subset
 DataFrame_unique,keep
 DataFrame_unique,maintain_order
-DataFrame_unnest,columns
+DataFrame_unnest,...
 DataFrame_unnest,...
 DataFrame_unpivot,on
 DataFrame_unpivot,index
@@ -459,7 +516,7 @@ DataFrame_unpivot,variable_name
 DataFrame_unpivot,value_name
 DataFrame_unstack,step
 DataFrame_unstack,how
-DataFrame_unstack,columns
+DataFrame_unstack,...
 DataFrame_unstack,fill_values
 DataFrame_update,other
 DataFrame_update,on
@@ -499,6 +556,9 @@ DataFrame_write_csv,float_scientific
 DataFrame_write_csv,float_precision
 DataFrame_write_csv,null_value
 DataFrame_write_csv,quote_style
+DataFrame_write_csv,storage_options
+DataFrame_write_csv,credential_provider
+DataFrame_write_csv,retries
 DataFrame_write_database,table_name
 DataFrame_write_database,connection
 DataFrame_write_database,if_table_exists
@@ -508,6 +568,7 @@ DataFrame_write_delta,target
 DataFrame_write_delta,mode
 DataFrame_write_delta,overwrite_schema
 DataFrame_write_delta,storage_options
+DataFrame_write_delta,credential_provider
 DataFrame_write_delta,delta_write_options
 DataFrame_write_delta,delta_merge_options
 DataFrame_write_excel,workbook
@@ -536,6 +597,9 @@ DataFrame_write_excel,freeze_panes
 DataFrame_write_ipc,file
 DataFrame_write_ipc,compression
 DataFrame_write_ipc,compat_level
+DataFrame_write_ipc,storage_options
+DataFrame_write_ipc,credential_provider
+DataFrame_write_ipc,retries
 DataFrame_write_ipc_stream,file
 DataFrame_write_ipc_stream,compression
 DataFrame_write_ipc_stream,compat_level
@@ -551,26 +615,58 @@ DataFrame_write_parquet,use_pyarrow
 DataFrame_write_parquet,pyarrow_options
 DataFrame_write_parquet,partition_by
 DataFrame_write_parquet,partition_chunk_size_bytes
+DataFrame_write_parquet,storage_options
+DataFrame_write_parquet,credential_provider
+DataFrame_write_parquet,retries
+Series_abs,NO ARGS
 Series_alias,name
 Series_all,ignore_nulls
 Series_any,ignore_nulls
 Series_append,other
+Series_approx_n_unique,NO ARGS
+Series_arccos,NO ARGS
+Series_arccosh,NO ARGS
+Series_arcsin,NO ARGS
+Series_arcsinh,NO ARGS
+Series_arctan,NO ARGS
+Series_arctanh,NO ARGS
+Series_arg_max,NO ARGS
+Series_arg_min,NO ARGS
 Series_arg_sort,descending
 Series_arg_sort,nulls_last
+Series_arg_true,NO ARGS
+Series_arg_unique,NO ARGS
+Series_bitwise_and,NO ARGS
+Series_bitwise_count_ones,NO ARGS
+Series_bitwise_count_zeros,NO ARGS
+Series_bitwise_leading_ones,NO ARGS
+Series_bitwise_leading_zeros,NO ARGS
+Series_bitwise_or,NO ARGS
+Series_bitwise_trailing_ones,NO ARGS
+Series_bitwise_trailing_zeros,NO ARGS
+Series_bitwise_xor,NO ARGS
 Series_bottom_k,k
 Series_cast,dtype
 Series_cast,strict
 Series_cast,wrap_numerical
+Series_cbrt,NO ARGS
+Series_ceil,NO ARGS
+Series_chunk_lengths,NO ARGS
 Series_clear,n
 Series_clip,lower_bound
 Series_clip,upper_bound
+Series_clone,NO ARGS
+Series_cos,NO ARGS
+Series_cosh,NO ARGS
+Series_cot,NO ARGS
+Series_count,NO ARGS
 Series_cum_count,reverse
 Series_cum_max,reverse
 Series_cum_min,reverse
 Series_cum_prod,reverse
 Series_cum_sum,reverse
 Series_cumulative_eval,expr
-Series_cumulative_eval,min_periods
+Series_cumulative_eval,min_samples
 Series_cumulative_eval,parallel
 Series_cut,breaks
 Series_cut,labels
@@ -581,6 +677,8 @@ Series_describe,interpolation
 Series_diff,n
 Series_diff,null_behavior
 Series_dot,other
+Series_drop_nans,NO ARGS
+Series_drop_nulls,NO ARGS
 Series_entropy,base
 Series_entropy,normalize
 Series_eq,other
@@ -595,7 +693,7 @@ Series_ewm_mean,span
 Series_ewm_mean,half_life
 Series_ewm_mean,alpha
 Series_ewm_mean,adjust
-Series_ewm_mean,min_periods
+Series_ewm_mean,min_samples
 Series_ewm_mean,ignore_nulls
 Series_ewm_mean_by,by
 Series_ewm_mean_by,half_life
@@ -605,7 +703,7 @@ Series_ewm_std,half_life
 Series_ewm_std,alpha
 Series_ewm_std,adjust
 Series_ewm_std,bias
-Series_ewm_std,min_periods
+Series_ewm_std,min_samples
 Series_ewm_std,ignore_nulls
 Series_ewm_var,com
 Series_ewm_var,span
@@ -613,8 +711,10 @@ Series_ewm_var,half_life
 Series_ewm_var,alpha
 Series_ewm_var,adjust
 Series_ewm_var,bias
-Series_ewm_var,min_periods
+Series_ewm_var,min_samples
 Series_ewm_var,ignore_nulls
+Series_exp,NO ARGS
+Series_explode,NO ARGS
 Series_extend,other
 Series_extend_constant,value
 Series_extend_constant,n
@@ -623,11 +723,15 @@ Series_fill_null,value
 Series_fill_null,strategy
 Series_fill_null,limit
 Series_filter,predicate
+Series_first,NO ARGS
+Series_floor,NO ARGS
 Series_gather,indices
 Series_gather_every,n
 Series_gather_every,offset
 Series_ge,other
+Series_get_chunks,NO ARGS
 Series_gt,other
+Series_has_nulls,NO ARGS
 Series_hash,seed
 Series_hash,seed_1
 Series_hash,seed_2
@@ -637,30 +741,62 @@ Series_hist,bins
 Series_hist,bin_count
 Series_hist,include_category
 Series_hist,include_breakpoint
+Series_implode,NO ARGS
+Series_index_of,element
 Series_interpolate,method
 Series_interpolate_by,by
 Series_is_between,lower_bound
 Series_is_between,upper_bound
 Series_is_between,closed
+Series_is_duplicated,NO ARGS
+Series_is_empty,NO ARGS
+Series_is_finite,NO ARGS
+Series_is_first_distinct,NO ARGS
 Series_is_in,other
+Series_is_infinite,NO ARGS
+Series_is_last_distinct,NO ARGS
+Series_is_nan,NO ARGS
+Series_is_not_nan,NO ARGS
+Series_is_not_null,NO ARGS
+Series_is_null,NO ARGS
 Series_is_sorted,descending
 Series_is_sorted,nulls_last
+Series_is_unique,NO ARGS
 Series_item,index
 Series_kurtosis,fisher
 Series_kurtosis,bias
+Series_last,NO ARGS
 Series_le,other
+Series_len,NO ARGS
 Series_limit,n
 Series_log,base
+Series_log10,NO ARGS
+Series_log1p,NO ARGS
+Series_lower_bound,NO ARGS
 Series_lt,other
 Series_map_elements,function
 Series_map_elements,return_dtype
 Series_map_elements,skip_nulls
+Series_max,NO ARGS
+Series_mean,NO ARGS
+Series_median,NO ARGS
+Series_min,NO ARGS
+Series_mode,NO ARGS
+Series_n_chunks,NO ARGS
+Series_n_unique,NO ARGS
+Series_nan_max,NO ARGS
+Series_nan_min,NO ARGS
 Series_ne,other
 Series_ne_missing,other
 Series_new_from_index,index
 Series_new_from_index,length
+Series_not_,NO ARGS
+Series_null_count,NO ARGS
 Series_pct_change,n
+Series_peak_max,NO ARGS
+Series_peak_min,NO ARGS
 Series_pow,exponent
+Series_product,NO ARGS
 Series_qcut,quantiles
 Series_qcut,labels
 Series_qcut,left_closed
@@ -683,47 +819,50 @@ Series_replace_strict,new
 Series_replace_strict,default
 Series_replace_strict,return_dtype
 Series_reshape,dimensions
+Series_reverse,NO ARGS
+Series_rle,NO ARGS
+Series_rle_id,NO ARGS
 Series_rolling_map,function
 Series_rolling_map,window_size
 Series_rolling_map,weights
-Series_rolling_map,min_periods
+Series_rolling_map,min_samples
 Series_rolling_map,center
 Series_rolling_max,window_size
 Series_rolling_max,weights
-Series_rolling_max,min_periods
+Series_rolling_max,min_samples
 Series_rolling_max,center
 Series_rolling_mean,window_size
 Series_rolling_mean,weights
-Series_rolling_mean,min_periods
+Series_rolling_mean,min_samples
 Series_rolling_mean,center
 Series_rolling_median,window_size
 Series_rolling_median,weights
-Series_rolling_median,min_periods
+Series_rolling_median,min_samples
 Series_rolling_median,center
 Series_rolling_min,window_size
 Series_rolling_min,weights
-Series_rolling_min,min_periods
+Series_rolling_min,min_samples
 Series_rolling_min,center
 Series_rolling_quantile,quantile
 Series_rolling_quantile,interpolation
 Series_rolling_quantile,window_size
 Series_rolling_quantile,weights
-Series_rolling_quantile,min_periods
+Series_rolling_quantile,min_samples
 Series_rolling_quantile,center
 Series_rolling_skew,window_size
 Series_rolling_skew,bias
 Series_rolling_std,window_size
 Series_rolling_std,weights
-Series_rolling_std,min_periods
+Series_rolling_std,min_samples
 Series_rolling_std,center
 Series_rolling_std,ddof
 Series_rolling_sum,window_size
 Series_rolling_sum,weights
-Series_rolling_sum,min_periods
+Series_rolling_sum,min_samples
 Series_rolling_sum,center
 Series_rolling_var,window_size
 Series_rolling_var,weights
-Series_rolling_var,min_periods
+Series_rolling_var,min_samples
 Series_rolling_var,center
 Series_rolling_var,ddof
 Series_round,decimals
@@ -742,8 +881,12 @@ Series_set,value
 Series_set_sorted,descending
 Series_shift,n
 Series_shift,fill_value
+Series_shrink_dtype,NO ARGS
 Series_shrink_to_fit,in_place
 Series_shuffle,seed
+Series_sign,NO ARGS
+Series_sin,NO ARGS
+Series_sinh,NO ARGS
 Series_skew,bias
 Series_slice,offset
 Series_slice,length
@@ -751,22 +894,31 @@ Series_sort,descending
 Series_sort,nulls_last
 Series_sort,multithreaded
 Series_sort,in_place
+Series_sqrt,NO ARGS
 Series_std,ddof
+Series_sum,NO ARGS
 Series_tail,n
+Series_tan,NO ARGS
+Series_tanh,NO ARGS
 Series_to_arrow,compat_level
 Series_to_dummies,separator
 Series_to_dummies,drop_first
 Series_to_frame,name
 Series_to_init_repr,n
 Series_to_jax,device
+Series_to_list,NO ARGS
 Series_to_numpy,writable
 Series_to_numpy,allow_copy
 Series_to_numpy,use_pyarrow
 Series_to_numpy,zero_copy_only
 Series_to_pandas,...
 Series_to_pandas,use_pyarrow_extension_array
+Series_to_physical,NO ARGS
+Series_to_torch,NO ARGS
 Series_top_k,k
 Series_unique,maintain_order
+Series_unique_counts,NO ARGS
+Series_upper_bound,NO ARGS
 Series_value_counts,sort
 Series_value_counts,parallel
 Series_value_counts,name
@@ -774,16 +926,38 @@ Series_value_counts,normalize
 Series_var,ddof
 Series_zip_with,mask
 Series_zip_with,other
+Expr_abs,NO ARGS
 Expr_add,other
+Expr_agg_groups,NO ARGS
 Expr_alias,name
 Expr_all,ignore_nulls
 Expr_and_,others
 Expr_any,ignore_nulls
 Expr_append,other
 Expr_append,upcast
+Expr_approx_n_unique,NO ARGS
+Expr_arccos,NO ARGS
+Expr_arccosh,NO ARGS
+Expr_arcsin,NO ARGS
+Expr_arcsinh,NO ARGS
+Expr_arctan,NO ARGS
+Expr_arctanh,NO ARGS
+Expr_arg_max,NO ARGS
+Expr_arg_min,NO ARGS
 Expr_arg_sort,descending
 Expr_arg_sort,nulls_last
+Expr_arg_true,NO ARGS
+Expr_arg_unique,NO ARGS
 Expr_backward_fill,limit
+Expr_bitwise_and,NO ARGS
+Expr_bitwise_count_ones,NO ARGS
+Expr_bitwise_count_zeros,NO ARGS
+Expr_bitwise_leading_ones,NO ARGS
+Expr_bitwise_leading_zeros,NO ARGS
+Expr_bitwise_or,NO ARGS
+Expr_bitwise_trailing_ones,NO ARGS
+Expr_bitwise_trailing_zeros,NO ARGS
+Expr_bitwise_xor,NO ARGS
 Expr_bottom_k,k
 Expr_bottom_k_by,by
 Expr_bottom_k_by,k
@@ -791,26 +965,35 @@ Expr_bottom_k_by,reverse
 Expr_cast,dtype
 Expr_cast,strict
 Expr_cast,wrap_numerical
+Expr_cbrt,NO ARGS
+Expr_ceil,NO ARGS
 Expr_clip,lower_bound
 Expr_clip,upper_bound
+Expr_cos,NO ARGS
+Expr_cosh,NO ARGS
+Expr_cot,NO ARGS
+Expr_count,NO ARGS
 Expr_cum_count,reverse
 Expr_cum_max,reverse
 Expr_cum_min,reverse
 Expr_cum_prod,reverse
 Expr_cum_sum,reverse
 Expr_cumulative_eval,expr
-Expr_cumulative_eval,min_periods
+Expr_cumulative_eval,min_samples
 Expr_cumulative_eval,parallel
 Expr_cut,breaks
 Expr_cut,labels
 Expr_cut,left_closed
 Expr_cut,include_breaks
+Expr_degrees,NO ARGS
 Expr_deserialize,cls
 Expr_deserialize,source
 Expr_deserialize,format
 Expr_diff,n
 Expr_diff,null_behavior
 Expr_dot,other
+Expr_drop_nans,NO ARGS
+Expr_drop_nulls,NO ARGS
 Expr_entropy,base
 Expr_entropy,normalize
 Expr_eq,other
@@ -820,7 +1003,7 @@ Expr_ewm_mean,span
 Expr_ewm_mean,half_life
 Expr_ewm_mean,alpha
 Expr_ewm_mean,adjust
-Expr_ewm_mean,min_periods
+Expr_ewm_mean,min_samples
 Expr_ewm_mean,ignore_nulls
 Expr_ewm_mean_by,by
 Expr_ewm_mean_by,half_life
@@ -830,7 +1013,7 @@ Expr_ewm_std,half_life
 Expr_ewm_std,alpha
 Expr_ewm_std,adjust
 Expr_ewm_std,bias
-Expr_ewm_std,min_periods
+Expr_ewm_std,min_samples
 Expr_ewm_std,ignore_nulls
 Expr_ewm_var,com
 Expr_ewm_var,span
@@ -838,10 +1021,12 @@ Expr_ewm_var,half_life
 Expr_ewm_var,alpha
 Expr_ewm_var,adjust
 Expr_ewm_var,bias
-Expr_ewm_var,min_periods
+Expr_ewm_var,min_samples
 Expr_ewm_var,ignore_nulls
-Expr_exclude,columns
 Expr_exclude,...
+Expr_exclude,...
+Expr_exp,NO ARGS
+Expr_explode,NO ARGS
 Expr_extend_constant,value
 Expr_extend_constant,n
 Expr_fill_nan,value
@@ -850,6 +1035,9 @@ Expr_fill_null,strategy
 Expr_fill_null,limit
 Expr_filter,predicates
 Expr_filter,...
+Expr_first,NO ARGS
+Expr_flatten,NO ARGS
+Expr_floor,NO ARGS
 Expr_floordiv,other
 Expr_forward_fill,limit
 Expr_from_json,cls
@@ -860,6 +1048,7 @@ Expr_gather_every,offset
 Expr_ge,other
 Expr_get,index
 Expr_gt,other
+Expr_has_nulls,NO ARGS
 Expr_hash,seed
 Expr_hash,seed_1
 Expr_hash,seed_2
@@ -869,18 +1058,35 @@ Expr_hist,bins
 Expr_hist,bin_count
 Expr_hist,include_category
 Expr_hist,include_breakpoint
+Expr_implode,NO ARGS
+Expr_index_of,element
 Expr_inspect,fmt
 Expr_interpolate,method
 Expr_interpolate_by,by
 Expr_is_between,lower_bound
 Expr_is_between,upper_bound
 Expr_is_between,closed
+Expr_is_duplicated,NO ARGS
+Expr_is_finite,NO ARGS
+Expr_is_first_distinct,NO ARGS
 Expr_is_in,other
+Expr_is_infinite,NO ARGS
+Expr_is_last_distinct,NO ARGS
+Expr_is_nan,NO ARGS
+Expr_is_not_nan,NO ARGS
+Expr_is_not_null,NO ARGS
+Expr_is_null,NO ARGS
+Expr_is_unique,NO ARGS
 Expr_kurtosis,fisher
 Expr_kurtosis,bias
+Expr_last,NO ARGS
 Expr_le,other
+Expr_len,NO ARGS
 Expr_limit,n
 Expr_log,base
+Expr_log10,NO ARGS
+Expr_log1p,NO ARGS
+Expr_lower_bound,NO ARGS
 Expr_lt,other
 Expr_map_batches,function
 Expr_map_batches,return_dtype
@@ -893,19 +1099,35 @@ Expr_map_elements,skip_nulls
 Expr_map_elements,pass_name
 Expr_map_elements,strategy
 Expr_map_elements,returns_scalar
+Expr_max,NO ARGS
+Expr_mean,NO ARGS
+Expr_median,NO ARGS
+Expr_min,NO ARGS
 Expr_mod,other
+Expr_mode,NO ARGS
 Expr_mul,other
+Expr_n_unique,NO ARGS
+Expr_nan_max,NO ARGS
+Expr_nan_min,NO ARGS
 Expr_ne,other
 Expr_ne_missing,other
+Expr_neg,NO ARGS
+Expr_not_,NO ARGS
+Expr_null_count,NO ARGS
 Expr_or_,others
 Expr_over,partition_by
 Expr_over,...
 Expr_over,order_by
+Expr_over,descending
+Expr_over,nulls_last
 Expr_over,mapping_strategy
 Expr_pct_change,n
+Expr_peak_max,NO ARGS
+Expr_peak_min,NO ARGS
 Expr_pipe,function
 Expr_pipe,...
 Expr_pow,exponent
+Expr_product,NO ARGS
 Expr_qcut,quantiles
 Expr_qcut,labels
 Expr_qcut,left_closed
@@ -913,9 +1135,11 @@ Expr_qcut,allow_duplicates
 Expr_qcut,include_breaks
 Expr_quantile,quantile
 Expr_quantile,interpolation
+Expr_radians,NO ARGS
 Expr_rank,method
 Expr_rank,descending
 Expr_rank,seed
+Expr_rechunk,NO ARGS
 Expr_reinterpret,signed
 Expr_repeat_by,by
 Expr_replace,old
@@ -927,6 +1151,9 @@ Expr_replace_strict,new
 Expr_replace_strict,default
 Expr_replace_strict,return_dtype
 Expr_reshape,dimensions
+Expr_reverse,NO ARGS
+Expr_rle,NO ARGS
+Expr_rle_id,NO ARGS
 Expr_rolling,index_column
 Expr_rolling,period
 Expr_rolling,offset
@@ -934,80 +1161,80 @@ Expr_rolling,closed
 Expr_rolling_map,function
 Expr_rolling_map,window_size
 Expr_rolling_map,weights
-Expr_rolling_map,min_periods
+Expr_rolling_map,min_samples
 Expr_rolling_map,center
 Expr_rolling_max,window_size
 Expr_rolling_max,weights
-Expr_rolling_max,min_periods
+Expr_rolling_max,min_samples
 Expr_rolling_max,center
 Expr_rolling_max_by,by
 Expr_rolling_max_by,window_size
-Expr_rolling_max_by,min_periods
+Expr_rolling_max_by,min_samples
 Expr_rolling_max_by,closed
 Expr_rolling_mean,window_size
 Expr_rolling_mean,weights
-Expr_rolling_mean,min_periods
+Expr_rolling_mean,min_samples
 Expr_rolling_mean,center
 Expr_rolling_mean_by,by
 Expr_rolling_mean_by,window_size
-Expr_rolling_mean_by,min_periods
+Expr_rolling_mean_by,min_samples
 Expr_rolling_mean_by,closed
 Expr_rolling_median,window_size
 Expr_rolling_median,weights
-Expr_rolling_median,min_periods
+Expr_rolling_median,min_samples
 Expr_rolling_median,center
 Expr_rolling_median_by,by
 Expr_rolling_median_by,window_size
-Expr_rolling_median_by,min_periods
+Expr_rolling_median_by,min_samples
 Expr_rolling_median_by,closed
 Expr_rolling_min,window_size
 Expr_rolling_min,weights
-Expr_rolling_min,min_periods
+Expr_rolling_min,min_samples
 Expr_rolling_min,center
 Expr_rolling_min_by,by
 Expr_rolling_min_by,window_size
-Expr_rolling_min_by,min_periods
+Expr_rolling_min_by,min_samples
 Expr_rolling_min_by,closed
 Expr_rolling_quantile,quantile
 Expr_rolling_quantile,interpolation
 Expr_rolling_quantile,window_size
 Expr_rolling_quantile,weights
-Expr_rolling_quantile,min_periods
+Expr_rolling_quantile,min_samples
 Expr_rolling_quantile,center
 Expr_rolling_quantile_by,by
 Expr_rolling_quantile_by,window_size
 Expr_rolling_quantile_by,quantile
 Expr_rolling_quantile_by,interpolation
-Expr_rolling_quantile_by,min_periods
+Expr_rolling_quantile_by,min_samples
 Expr_rolling_quantile_by,closed
 Expr_rolling_skew,window_size
 Expr_rolling_skew,bias
 Expr_rolling_std,window_size
 Expr_rolling_std,weights
-Expr_rolling_std,min_periods
+Expr_rolling_std,min_samples
 Expr_rolling_std,center
 Expr_rolling_std,ddof
 Expr_rolling_std_by,by
 Expr_rolling_std_by,window_size
-Expr_rolling_std_by,min_periods
+Expr_rolling_std_by,min_samples
 Expr_rolling_std_by,closed
 Expr_rolling_std_by,ddof
 Expr_rolling_sum,window_size
 Expr_rolling_sum,weights
-Expr_rolling_sum,min_periods
+Expr_rolling_sum,min_samples
 Expr_rolling_sum,center
 Expr_rolling_sum_by,by
 Expr_rolling_sum_by,window_size
-Expr_rolling_sum_by,min_periods
+Expr_rolling_sum_by,min_samples
 Expr_rolling_sum_by,closed
 Expr_rolling_var,window_size
 Expr_rolling_var,weights
-Expr_rolling_var,min_periods
+Expr_rolling_var,min_samples
 Expr_rolling_var,center
 Expr_rolling_var,ddof
 Expr_rolling_var_by,by
 Expr_rolling_var_by,window_size
-Expr_rolling_var_by,min_periods
+Expr_rolling_var_by,min_samples
 Expr_rolling_var_by,closed
 Expr_rolling_var_by,ddof
 Expr_round,decimals
@@ -1022,7 +1249,11 @@ Expr_search_sorted,side
 Expr_set_sorted,descending
 Expr_shift,n
 Expr_shift,fill_value
+Expr_shrink_dtype,NO ARGS
 Expr_shuffle,seed
+Expr_sign,NO ARGS
+Expr_sin,NO ARGS
+Expr_sinh,NO ARGS
 Expr_skew,bias
 Expr_slice,offset
 Expr_slice,length
@@ -1034,60 +1265,130 @@ Expr_sort_by,descending
 Expr_sort_by,nulls_last
 Expr_sort_by,multithreaded
 Expr_sort_by,maintain_order
+Expr_sqrt,NO ARGS
 Expr_std,ddof
 Expr_sub,other
+Expr_sum,NO ARGS
 Expr_tail,n
+Expr_tan,NO ARGS
+Expr_tanh,NO ARGS
+Expr_to_physical,NO ARGS
 Expr_top_k,k
 Expr_top_k_by,by
 Expr_top_k_by,k
 Expr_top_k_by,reverse
 Expr_truediv,other
 Expr_unique,maintain_order
+Expr_unique_counts,NO ARGS
+Expr_upper_bound,NO ARGS
 Expr_value_counts,sort
 Expr_value_counts,parallel
 Expr_value_counts,name
 Expr_value_counts,normalize
 Expr_var,ddof
 Expr_xor,other
+Expr_arr_all,NO ARGS
+Expr_arr_any,NO ARGS
+Expr_arr_arg_max,NO ARGS
+Expr_arr_arg_min,NO ARGS
 Expr_arr_contains,item
 Expr_arr_count_matches,element
+Expr_arr_explode,NO ARGS
+Expr_arr_first,NO ARGS
 Expr_arr_get,index
 Expr_arr_get,null_on_oob
 Expr_arr_join,separator
 Expr_arr_join,ignore_nulls
+Expr_arr_last,NO ARGS
+Expr_arr_max,NO ARGS
+Expr_arr_median,NO ARGS
+Expr_arr_min,NO ARGS
+Expr_arr_n_unique,NO ARGS
+Expr_arr_reverse,NO ARGS
 Expr_arr_shift,n
 Expr_arr_sort,descending
 Expr_arr_sort,nulls_last
 Expr_arr_std,ddof
+Expr_arr_sum,NO ARGS
+Expr_arr_to_list,NO ARGS
 Expr_arr_to_struct,fields
 Expr_arr_unique,maintain_order
 Expr_arr_var,ddof
+Expr_cat_ends_with,suffix
+Expr_cat_get_categories,NO ARGS
+Expr_cat_len_bytes,NO ARGS
+Expr_cat_len_chars,NO ARGS
+Expr_cat_starts_with,prefix
 Expr_dt_add_business_days,n
 Expr_dt_add_business_days,week_mask
 Expr_dt_add_business_days,holidays
 Expr_dt_add_business_days,roll
+Expr_dt_base_utc_offset,NO ARGS
 Expr_dt_cast_time_unit,time_unit
+Expr_dt_century,NO ARGS
 Expr_dt_combine,time
 Expr_dt_combine,time_unit
 Expr_dt_convert_time_zone,time_zone
+Expr_dt_date,NO ARGS
+Expr_dt_day,NO ARGS
+Expr_dt_dst_offset,NO ARGS
 Expr_dt_epoch,time_unit
+Expr_dt_hour,NO ARGS
+Expr_dt_is_leap_year,NO ARGS
+Expr_dt_iso_year,NO ARGS
+Expr_dt_microsecond,NO ARGS
+Expr_dt_millennium,NO ARGS
+Expr_dt_millisecond,NO ARGS
+Expr_dt_minute,NO ARGS
+Expr_dt_month,NO ARGS
+Expr_dt_month_end,NO ARGS
+Expr_dt_month_start,NO ARGS
+Expr_dt_nanosecond,NO ARGS
 Expr_dt_offset_by,by
+Expr_dt_ordinal_day,NO ARGS
+Expr_dt_quarter,NO ARGS
+Expr_dt_replace,year
+Expr_dt_replace,month
+Expr_dt_replace,day
+Expr_dt_replace,hour
+Expr_dt_replace,minute
+Expr_dt_replace,second
+Expr_dt_replace,microsecond
+Expr_dt_replace,ambiguous
 Expr_dt_replace_time_zone,time_zone
 Expr_dt_replace_time_zone,ambiguous
 Expr_dt_replace_time_zone,non_existent
 Expr_dt_round,every
 Expr_dt_second,fractional
 Expr_dt_strftime,format
+Expr_dt_time,NO ARGS
 Expr_dt_timestamp,time_unit
 Expr_dt_to_string,format
+Expr_dt_total_days,NO ARGS
+Expr_dt_total_hours,NO ARGS
+Expr_dt_total_microseconds,NO ARGS
+Expr_dt_total_milliseconds,NO ARGS
+Expr_dt_total_minutes,NO ARGS
+Expr_dt_total_nanoseconds,NO ARGS
+Expr_dt_total_seconds,NO ARGS
 Expr_dt_truncate,every
+Expr_dt_week,NO ARGS
+Expr_dt_weekday,NO ARGS
+Expr_dt_year,NO ARGS
+Expr_list_all,NO ARGS
+Expr_list_any,NO ARGS
+Expr_list_arg_max,NO ARGS
+Expr_list_arg_min,NO ARGS
 Expr_list_concat,other
 Expr_list_contains,item
 Expr_list_count_matches,element
 Expr_list_diff,n
 Expr_list_diff,null_behavior
+Expr_list_drop_nulls,NO ARGS
 Expr_list_eval,expr
 Expr_list_eval,parallel
+Expr_list_explode,NO ARGS
+Expr_list_first,NO ARGS
 Expr_list_gather,indices
 Expr_list_gather,null_on_oob
 Expr_list_gather_every,n
@@ -1097,6 +1398,14 @@ Expr_list_get,null_on_oob
 Expr_list_head,n
 Expr_list_join,separator
 Expr_list_join,ignore_nulls
+Expr_list_last,NO ARGS
+Expr_list_len,NO ARGS
+Expr_list_max,NO ARGS
+Expr_list_mean,NO ARGS
+Expr_list_median,NO ARGS
+Expr_list_min,NO ARGS
+Expr_list_n_unique,NO ARGS
+Expr_list_reverse,NO ARGS
 Expr_list_sample,n
 Expr_list_sample,fraction
 Expr_list_sample,with_replacement
@@ -1112,6 +1421,7 @@ Expr_list_slice,length
 Expr_list_sort,descending
 Expr_list_sort,nulls_last
 Expr_list_std,ddof
+Expr_list_sum,NO ARGS
 Expr_list_tail,n
 Expr_list_to_array,width
 Expr_list_to_struct,n_field_strategy
@@ -1120,19 +1430,33 @@ Expr_list_to_struct,upper_bound
 Expr_list_unique,maintain_order
 Expr_list_var,ddof
 Expr_meta_eq,other
+Expr_meta_has_multiple_outputs,NO ARGS
+Expr_meta_is_column,NO ARGS
 Expr_meta_is_column_selection,allow_aliasing
+Expr_meta_is_literal,allow_aliasing
+Expr_meta_is_regex_projection,NO ARGS
 Expr_meta_ne,other
 Expr_meta_output_name,raise_if_undetermined
+Expr_meta_pop,NO ARGS
+Expr_meta_root_names,NO ARGS
 Expr_meta_serialize,file
 Expr_meta_serialize,format
+Expr_meta_show_graph,show
+Expr_meta_show_graph,output_path
+Expr_meta_show_graph,raw_output
+Expr_meta_show_graph,figsize
 Expr_meta_tree_format,return_as_string
+Expr_meta_undo_aliases,NO ARGS
 Expr_meta_write_json,file
+Expr_name_keep,NO ARGS
 Expr_name_map,function
 Expr_name_map_fields,function
 Expr_name_prefix,prefix
 Expr_name_prefix_fields,prefix
 Expr_name_suffix,suffix
 Expr_name_suffix_fields,suffix
+Expr_name_to_lowercase,NO ARGS
+Expr_name_to_uppercase,NO ARGS
 Expr_str_concat,delimiter
 Expr_str_concat,ignore_nulls
 Expr_str_contains,pattern
@@ -1146,6 +1470,7 @@ Expr_str_decode,encoding
 Expr_str_decode,strict
 Expr_str_encode,encoding
 Expr_str_ends_with,suffix
+Expr_str_escape_regex,NO ARGS
 Expr_str_extract,pattern
 Expr_str_extract,group_index
 Expr_str_extract_all,pattern
@@ -1156,12 +1481,18 @@ Expr_str_extract_many,overlapping
 Expr_str_find,pattern
 Expr_str_find,literal
 Expr_str_find,strict
+Expr_str_find_many,patterns
+Expr_str_find_many,ascii_case_insensitive
+Expr_str_find_many,overlapping
 Expr_str_head,n
 Expr_str_join,delimiter
 Expr_str_join,ignore_nulls
 Expr_str_json_decode,dtype
 Expr_str_json_decode,infer_schema_length
 Expr_str_json_path_match,json_path
+Expr_str_len_bytes,NO ARGS
+Expr_str_len_chars,NO ARGS
+Expr_str_normalize,form
 Expr_str_pad_end,length
 Expr_str_pad_end,fill_char
 Expr_str_pad_start,length
@@ -1176,6 +1507,7 @@ Expr_str_replace_all,literal
 Expr_str_replace_many,patterns
 Expr_str_replace_many,replace_with
 Expr_str_replace_many,ascii_case_insensitive
+Expr_str_reverse,NO ARGS
 Expr_str_slice,offset
 Expr_str_slice,length
 Expr_str_split,by
@@ -1212,12 +1544,17 @@ Expr_str_to_datetime,ambiguous
 Expr_str_to_decimal,inference_length
 Expr_str_to_integer,base
 Expr_str_to_integer,strict
+Expr_str_to_lowercase,NO ARGS
 Expr_str_to_time,format
 Expr_str_to_time,strict
 Expr_str_to_time,cache
+Expr_str_to_titlecase,NO ARGS
+Expr_str_to_uppercase,NO ARGS
 Expr_str_zfill,length
 Expr_struct_field,name
 Expr_struct_field,...
+Expr_struct_json_encode,NO ARGS
 Expr_struct_rename_fields,names
+Expr_struct_unnest,NO ARGS
 Expr_struct_with_fields,exprs
 Expr_struct_with_fields,...

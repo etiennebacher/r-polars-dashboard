@@ -44,6 +44,9 @@ get_args <- function(fun) {
     formalArgs(eval(parse(text = paste0("polars:::", fun)))),
     error = function(e) NULL
   )
+  if (is.null(args)) {
+    return("NO ARGS")
+  }
   args[args != "self"]
 }
 
@@ -100,6 +103,9 @@ get_args <- function(fun) {
     formalArgs(eval(parse(text = paste0("neopolars:::", fun)))),
     error = function(e) NULL
   )
+  if (is.null(args)) {
+    return("NO ARGS")
+  }
   args[args != "self"]
 }
 
