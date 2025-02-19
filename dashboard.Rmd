@@ -27,6 +27,7 @@ dicts <- list()
 families <- c(
   "LazyFrame",
   "DataFrame",
+  "Series",
   "Expr",
   "ExprArr",
   "ExprCat",
@@ -82,6 +83,7 @@ dicts <- list()
 families <- c(
   "lazyframe",
   "dataframe",
+  "series",
   "expr",
   "expr_arr",
   "expr_cat",
@@ -118,7 +120,8 @@ r_neopol_funs <- data.table::rbindlist(dicts) |>
     fun = stringr::str_replace_all(fun, c("expr__" = "expr_")),
     fun = stringr::str_replace_all(fun, c("expr_" = "Expr_")),
     fun = stringr::str_replace_all(fun, c("lazyframe__" = "LazyFrame_")),
-    fun = stringr::str_replace_all(fun, c("dataframe__" = "DataFrame_"))
+    fun = stringr::str_replace_all(fun, c("dataframe__" = "DataFrame_")),
+    fun = stringr::str_replace_all(fun, c("series__" = "Series_"))
   )
 
 # py-polars -----------------------------------------------------

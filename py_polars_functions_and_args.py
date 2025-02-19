@@ -4,7 +4,7 @@ import polars.selectors as cs
 import re
 
 
-families = ["LazyFrame", "DataFrame"]
+families = ["LazyFrame", "DataFrame", "Series"]
 
 dicts = {}
 
