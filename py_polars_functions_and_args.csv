@@ -1314,6 +1314,15 @@ Expr_arr_to_list,NO ARGS
 Expr_arr_to_struct,fields
 Expr_arr_unique,maintain_order
 Expr_arr_var,ddof
+Expr_bin_contains,literal
+Expr_bin_decode,encoding
+Expr_bin_decode,strict
+Expr_bin_encode,encoding
+Expr_bin_ends_with,suffix
+Expr_bin_reinterpret,dtype
+Expr_bin_reinterpret,endianness
+Expr_bin_size,unit
+Expr_bin_starts_with,prefix
 Expr_cat_ends_with,suffix
 Expr_cat_get_categories,NO ARGS
 Expr_cat_len_bytes,NO ARGS

@@ -30,7 +30,7 @@ dicts = {}
 
 
 def get_args(family, function):
-    if family in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]:
+    if family in ["arr", "bin", "cat", "dt", "list", "meta", "name", "str", "struct"]:
         fam = getattr(pl.col("x"), family)
         args = getattr(fam, function)
     elif family is not None:
@@ -82,7 +82,7 @@ fns = [
     x
     for x in fns
     if not x.startswith("_")
-    and x not in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]
+    and x not in ["arr", "bin", "cat", "dt", "list", "meta", "name", "str", "struct"]
 ]
 for function in fns:
     try:
@@ -91,7 +91,7 @@ for function in fns:
         print(f"function {function} has no args")
 
 # Expr subns
-for subns in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]:
+for subns in ["arr", "bin", "cat", "dt", "list", "meta", "name", "str", "struct"]:
     fns = dir(getattr(pl.col("x"), subns))
     fns = [x for x in fns if not x.startswith("_")]
     for function in fns:
@@ -101,7 +101,6 @@ for subns in ["arr", "cat", "dt", "list", "meta", "name", "str", "struct"]:
             )
         except:
             print(f"function {function} has no args")
-
 
 pl.from_dict(dicts).unpivot(cs.all()).explode("value").filter(
     pl.col("value") != "args"

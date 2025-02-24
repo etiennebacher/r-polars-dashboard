@@ -30,6 +30,7 @@ families <- c(
   "Series",
   "Expr",
   "ExprArr",
+  "ExprBin",
   "ExprCat",
   "ExprDT",
   "ExprList",
@@ -68,6 +69,7 @@ r_pol_funs <- data.table::rbindlist(dicts) |>
       fun,
       c(
         "ExprArr_" = "Expr_arr_",
+        "ExprBin_" = "Expr_bin_",
         "ExprCat_" = "Expr_cat_",
         "ExprDT_" = "Expr_dt_",
         "ExprList_" = "Expr_list_",
@@ -89,6 +91,7 @@ families <- c(
   "series",
   "expr",
   "expr_arr",
+  "expr_bin",
   "expr_cat",
   "expr_dt",
   "expr_list",
