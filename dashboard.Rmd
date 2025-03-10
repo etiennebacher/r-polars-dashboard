@@ -155,8 +155,8 @@ missing_funs_in_neopolars <- setdiff(
   unique(r_neopol_funs$fun)
 )
 missing_args_in_neopolars <- setdiff(
-  unique(r_pol_funs$fun),
-  unique(r_neopol_funs$fun)
+  unique(r_pol_funs$args),
+  unique(r_neopol_funs$args)
 )
 
 cat(
