@@ -150,24 +150,6 @@ dat <- py_pol_funs |>
   ) |>
   rename(fun_neo = fun, args_neo = args)
 
-missing_funs_in_neopolars <- setdiff(
-  unique(r_pol_funs$fun),
-  unique(r_neopol_funs$fun)
-)
-missing_args_in_neopolars <- setdiff(
-  unique(r_pol_funs$args),
-  unique(r_neopol_funs$args)
-)
-
-cat(
-  "Number of functions in r-polars and not in neo-polars:",
-  length(missing_funs_in_neopolars)
-)
-cat(
-  "Number of args in r-polars and not in neo-polars:",
-  length(missing_args_in_neopolars)
-)
-
 reactable(
   dat,
   defaultPageSize = nrow(dat),
