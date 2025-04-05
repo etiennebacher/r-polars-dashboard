@@ -102,10 +102,27 @@ families <- c(
 )
 
 get_args <- function(fun) {
-  args <- tryCatch(
-    formalArgs(eval(parse(text = paste0("neopolars:::", fun)))),
-    error = function(e) NULL
-  )
+  if (startsWith(fun, "series")) {
+    args <- tryCatch(
+      {
+        x <- eval(parse(
+          text = paste0("series_obj$", gsub("series__", "", fun))
+        ))
+        if (!is.function(x)) {
+          NULL
+        } else {
+          formalArgs(x)
+        }
+      },
+      error = function(e) NULL
+    )
+  } else {
+    args <- tryCatch(
+      formalArgs(eval(parse(text = paste0("neopolars:::", fun)))),
+      error = function(e) NULL
+    )
+  }
+
   if (is.null(args)) {
     return("NO ARGS")
   }
@@ -113,6 +130,11 @@ get_args <- function(fun) {
 }
 
 all_polars_obj <- ls(getNamespace("neopolars"), all.names = TRUE)
+
+# Series are dispatched from expr
+series_obj <- neopolars::as_polars_series(NULL)
+series_names <- paste0("series__", .DollarNames(series_obj))
+all_polars_obj <- c(all_polars_obj, series_names)
 
 for (fam in families) {
   fns <- all_polars_obj[startsWith(all_polars_obj, paste0(fam, "_"))]
