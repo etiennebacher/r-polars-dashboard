@@ -20,7 +20,7 @@ Overview
 
 
 ```{r pr_summary}
-# polars -----------------------------------------------
+# polars0 -----------------------------------------------
 
 dicts <- list()
 
@@ -42,7 +42,7 @@ families <- c(
 
 get_args <- function(fun) {
   args <- tryCatch(
-    formalArgs(eval(parse(text = paste0("polars:::", fun)))),
+    formalArgs(eval(parse(text = paste0("polars0:::", fun)))),
     error = function(e) NULL
   )
   if (is.null(args)) {
@@ -51,13 +51,15 @@ get_args <- function(fun) {
   args[args != "self"]
 }
 
-all_polars_obj <- ls(getNamespace("polars"), all.names = TRUE)
+all_polars0_obj <- ls(getNamespace("polars0"), all.names = TRUE)
 
 for (fam in families) {
-  fns <- all_polars_obj[startsWith(all_polars_obj, paste0(fam, "_"))]
+  fns <- all_polars0_obj[startsWith(all_polars0_obj, paste0(fam, "_"))]
   for (fun in fns) {
     args <- get_args(fun = fun)
-    if (length(args) == 0) next
+    if (length(args) == 0) {
+      next
+    }
     dicts[[paste0(fun)]] <- data.frame(fun = fun, args = args)
   }
 }
@@ -81,7 +83,7 @@ r_pol_funs <- data.table::rbindlist(dicts) |>
     )
   )
 
-# neopolars -----------------------------------------------------------
+# polars -----------------------------------------------------------
 
 dicts <- list()
 
@@ -118,7 +120,7 @@ get_args <- function(fun) {
     )
   } else {
     args <- tryCatch(
-      formalArgs(eval(parse(text = paste0("neopolars:::", fun)))),
+      formalArgs(eval(parse(text = paste0("polars:::", fun)))),
       error = function(e) NULL
     )
   }
@@ -129,10 +131,10 @@ get_args <- function(fun) {
   args[args != "self"]
 }
 
-all_polars_obj <- ls(getNamespace("neopolars"), all.names = TRUE)
+all_polars_obj <- ls(getNamespace("polars"), all.names = TRUE)
 
 # Series are dispatched from expr
-series_obj <- neopolars::as_polars_series(NULL)
+series_obj <- polars::as_polars_series(NULL)
 series_names <- paste0("series__", .DollarNames(series_obj))
 all_polars_obj <- c(all_polars_obj, series_names)
 
@@ -140,7 +142,9 @@ for (fam in families) {
   fns <- all_polars_obj[startsWith(all_polars_obj, paste0(fam, "_"))]
   for (fun in fns) {
     args <- get_args(fun = fun)
-    if (length(args) == 0) next
+    if (length(args) == 0) {
+      next
+    }
     dicts[[paste0(fun)]] <- data.frame(fun = fun, args = args)
   }
 }
