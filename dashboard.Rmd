@@ -94,7 +94,7 @@ r_pol_funs <- data.table::rbindlist(dicts) |>
     fun = stringr::str_replace_all(fun, c("series__" = "Series_")),
     # We don't want to highlight differences simply because py-polars has
     # "strict" and we have ".strict" for instance.
-    args = gsub("^\\.[a-zA-Z]", "", args),
+    args = gsub("^\\.([a-zA-Z])", "\\1", args),
     args = case_when(
       stringr::str_detect(fun, "(_drop_nans|_drop_nulls)$") & args == "..." ~ "subset",
       .default = args
