@@ -40,7 +40,7 @@ def get_args(family, function):
         args = getattr(pl.col("x"), function)
 
     source = inspect.getsource(args)
-    if re.match("\s+@deprecate_function", source):
+    if re.match("\\s+@deprecate_function", source):
         return
 
     args2 = (

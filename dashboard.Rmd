@@ -20,71 +20,6 @@ Overview
 
 
 ```{r pr_summary}
-# polars0 -----------------------------------------------
-
-dicts <- list()
-
-families <- c(
-  "LazyFrame",
-  "DataFrame",
-  "Series",
-  "Expr",
-  "ExprArr",
-  "ExprBin",
-  "ExprCat",
-  "ExprDT",
-  "ExprList",
-  "ExprMeta",
-  "ExprName",
-  "ExprStr",
-  "ExprStruct"
-)
-
-get_args <- function(fun) {
-  args <- tryCatch(
-    formalArgs(eval(parse(text = paste0("polars0:::", fun)))),
-    error = function(e) NULL
-  )
-  if (is.null(args)) {
-    return("NO ARGS")
-  }
-  args[args != "self"]
-}
-
-all_polars0_obj <- ls(getNamespace("polars0"), all.names = TRUE)
-
-for (fam in families) {
-  fns <- all_polars0_obj[startsWith(all_polars0_obj, paste0(fam, "_"))]
-  for (fun in fns) {
-    args <- get_args(fun = fun)
-    if (length(args) == 0) {
-      next
-    }
-    dicts[[paste0(fun)]] <- data.frame(fun = fun, args = args)
-  }
-}
-
-r_pol_funs <- data.table::rbindlist(dicts) |>
-  as_tibble() |>
-  mutate(
-    fun = stringr::str_replace_all(
-      fun,
-      c(
-        "ExprArr_" = "Expr_arr_",
-        "ExprBin_" = "Expr_bin_",
-        "ExprCat_" = "Expr_cat_",
-        "ExprDT_" = "Expr_dt_",
-        "ExprList_" = "Expr_list_",
-        "ExprMeta_" = "Expr_meta_",
-        "ExprName_" = "Expr_name_",
-        "ExprStr_" = "Expr_str_",
-        "ExprStruct_" = "Expr_struct_"
-      )
-    )
-  )
-
-# polars -----------------------------------------------------------
-
 dicts <- list()
 
 families <- c(
@@ -149,14 +84,21 @@ for (fam in families) {
   }
 }
 
-r_neopol_funs <- data.table::rbindlist(dicts) |>
+r_pol_funs <- data.table::rbindlist(dicts) |>
   as_tibble() |>
   mutate(
     fun = stringr::str_replace_all(fun, c("expr__" = "expr_")),
     fun = stringr::str_replace_all(fun, c("expr_" = "Expr_")),
     fun = stringr::str_replace_all(fun, c("lazyframe__" = "LazyFrame_")),
     fun = stringr::str_replace_all(fun, c("dataframe__" = "DataFrame_")),
-    fun = stringr::str_replace_all(fun, c("series__" = "Series_"))
+    fun = stringr::str_replace_all(fun, c("series__" = "Series_")),
+    # We don't want to highlight differences simply because py-polars has
+    # "strict" and we have ".strict" for instance.
+    args = gsub("^\\.[a-zA-Z]", "", args),
+    args = case_when(
+      stringr::str_detect(fun, "(_drop_nans|_drop_nulls)$") & args == "..." ~ "subset",
+      .default = args
+    )
   )
 
 # py-polars -----------------------------------------------------
@@ -168,13 +110,7 @@ py_pol_funs <- data.table::fread("py_polars_functions_and_args.csv") |>
 # gather ---------------------------------------------------
 
 dat <- py_pol_funs |>
-  left_join(r_pol_funs, suffix = c("_py", "_r"), keep = TRUE) |>
-  left_join(
-    r_neopol_funs,
-    join_by(fun_py == fun, args_py == args),
-    keep = TRUE
-  ) |>
-  rename(fun_neo = fun, args_neo = args)
+  left_join(r_pol_funs, suffix = c("_py", "_r"), keep = TRUE)
 
 reactable(
   dat,
@@ -193,18 +129,6 @@ reactable(
       }
     ),
     args_r = colDef(
-      style = function(value) {
-        color <- ifelse(is.na(value), "#ffb3b3", "white")
-        list(background = color)
-      }
-    ),
-    fun_neo = colDef(
-      style = function(value) {
-        color <- ifelse(is.na(value), "#ffb3b3", "white")
-        list(background = color)
-      }
-    ),
-    args_neo = colDef(
       style = function(value) {
         color <- ifelse(is.na(value), "#ffb3b3", "white")
         list(background = color)
