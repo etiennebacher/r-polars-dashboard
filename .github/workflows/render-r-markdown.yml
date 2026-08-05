@@ -4,8 +4,8 @@ on:
   pull_request:
     branches: [main, master]
   schedule:
-    # every day, every 8 hours
-    - cron: '0 0/8 * * *'
+    # every day, at 8am
+    - cron: '0 8 * * *'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
@@ -17,7 +17,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.RPOLARS_DASHBOARD_PAT }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: r-lib/actions/setup-r@v2
         with:
